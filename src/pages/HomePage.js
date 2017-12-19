@@ -1,11 +1,12 @@
 import React from 'react';
+import Game from '../components/ttt/TTTGame'
 
 
 export default class HomePage extends React.Component {
   render() {
     return (
-      <div>
-        Home Page
+      <div className="container-fluid">
+      		<Game />
       </div>
     );
   }

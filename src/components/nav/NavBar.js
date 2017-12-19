@@ -2,10 +2,14 @@
 
 import React from 'react';
 
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
 import './NavBar.css'
 import brandLogo from '../../images/brand-logo.png'
+
+const WrapNavLink = ({exact,to,children}) => {
+	return (<NavLink exact={exact} activeClassName="active" to={to} >{children}</NavLink>)
+}
 
 export default class NavBar extends React.Component {
 
@@ -45,7 +49,9 @@ export default class NavBar extends React.Component {
 
 	const safeCloseMenuOnResize = () =>() => this.closeMenusOnResize(this.dropdowns, this.collapse, closeMenusFn)
 	window.addEventListener('resize', safeCloseMenuOnResize(), false);
-	toggle.addEventListener('click', safeToggleMenu, false);
+	if(toggle){
+		toggle.addEventListener('click', safeToggleMenu, false);
+	}
 
 	}
 
@@ -82,25 +88,14 @@ export default class NavBar extends React.Component {
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <a className="navbar-brand brand-override" href="/"><img className="brand-img" src={brandLogo} /></a>
+            <a className="navbar-brand brand-override" href="/"><img className="brand-img" alt="Tic Tac" src={brandLogo} /></a>
+            <div className="navbar-brand override-text">TicTacToe</div>
           </div>
           <div id="navbar" className="navbar-collapse collapse">
             <ul className="nav navbar-nav">
-              <li className="active"><Link to="/" >Home</Link></li>
-              <li><Link to="/selectopp" >Opponents</Link></li>
-              <li><Link to="/about" >About</Link></li>
-              <li className="dropdown">
-                <div href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span className="caret"></span></div>
-                <ul className="dropdown-menu" role="menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li className="divider"></li>
-                  <li className="dropdown-header">Nav header</li>
-                  <li><a href="#">Separated link</a></li>
-                  <li><a href="#">One more separated link</a></li>
-                </ul>
-              </li>
+              <li><WrapNavLink exact={true} to="/" >Home</WrapNavLink></li>
+              <li><WrapNavLink to="/selectopp" >Opponents</WrapNavLink></li>
+              <li><WrapNavLink to="/about" >About</WrapNavLink></li>
             </ul>
           </div>
         </div>
