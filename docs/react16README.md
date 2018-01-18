@@ -1,28 +1,103 @@
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-Full generated documentsion from React bootstrapping is here [Full React 16.x Generated Doc](docs/react16README.md)
-
+Below you will find some information on how to perform common tasks.<br>
+You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
 
 ## Table of Contents
 
-- [Full React 16.x Generated Doc](docs/react16README.md)
-- [Docker Build and Deploy](#docker-build-deploy)
+- [Updating to New Releases](#updating-to-new-releases)
+- [Sending Feedback](#sending-feedback)
+- [Folder Structure](#folder-structure)
+- [Available Scripts](#available-scripts)
+  - [npm start](#npm-start)
+  - [npm test](#npm-test)
+  - [npm run build](#npm-run-build)
+  - [npm run eject](#npm-run-eject)
+- [Supported Language Features and Polyfills](#supported-language-features-and-polyfills)
+- [Syntax Highlighting in the Editor](#syntax-highlighting-in-the-editor)
+- [Displaying Lint Output in the Editor](#displaying-lint-output-in-the-editor)
+- [Debugging in the Editor](#debugging-in-the-editor)
+- [Formatting Code Automatically](#formatting-code-automatically)
+- [Changing the Page `<title>`](#changing-the-page-title)
+- [Installing a Dependency](#installing-a-dependency)
+- [Importing a Component](#importing-a-component)
+- [Code Splitting](#code-splitting)
+- [Adding a Stylesheet](#adding-a-stylesheet)
+- [Post-Processing CSS](#post-processing-css)
+- [Adding a CSS Preprocessor (Sass, Less etc.)](#adding-a-css-preprocessor-sass-less-etc)
+- [Adding Images, Fonts, and Files](#adding-images-fonts-and-files)
+- [Using the `public` Folder](#using-the-public-folder)
+  - [Changing the HTML](#changing-the-html)
+  - [Adding Assets Outside of the Module System](#adding-assets-outside-of-the-module-system)
+  - [When to Use the `public` Folder](#when-to-use-the-public-folder)
+- [Using Global Variables](#using-global-variables)
+- [Adding Bootstrap](#adding-bootstrap)
+  - [Using a Custom Theme](#using-a-custom-theme)
+- [Adding Flow](#adding-flow)
+- [Adding Custom Environment Variables](#adding-custom-environment-variables)
+  - [Referencing Environment Variables in the HTML](#referencing-environment-variables-in-the-html)
+  - [Adding Temporary Environment Variables In Your Shell](#adding-temporary-environment-variables-in-your-shell)
+  - [Adding Development Environment Variables In `.env`](#adding-development-environment-variables-in-env)
+- [Can I Use Decorators?](#can-i-use-decorators)
+- [Integrating with an API Backend](#integrating-with-an-api-backend)
+  - [Node](#node)
+  - [Ruby on Rails](#ruby-on-rails)
+- [Proxying API Requests in Development](#proxying-api-requests-in-development)
+  - ["Invalid Host Header" Errors After Configuring Proxy](#invalid-host-header-errors-after-configuring-proxy)
+  - [Configuring the Proxy Manually](#configuring-the-proxy-manually)
+  - [Configuring a WebSocket Proxy](#configuring-a-websocket-proxy)
+- [Using HTTPS in Development](#using-https-in-development)
+- [Generating Dynamic `<meta>` Tags on the Server](#generating-dynamic-meta-tags-on-the-server)
+- [Pre-Rendering into Static HTML Files](#pre-rendering-into-static-html-files)
+- [Injecting Data from the Server into the Page](#injecting-data-from-the-server-into-the-page)
+- [Running Tests](#running-tests)
+  - [Filename Conventions](#filename-conventions)
+  - [Command Line Interface](#command-line-interface)
+  - [Version Control Integration](#version-control-integration)
+  - [Writing Tests](#writing-tests)
+  - [Testing Components](#testing-components)
+  - [Using Third Party Assertion Libraries](#using-third-party-assertion-libraries)
+  - [Initializing Test Environment](#initializing-test-environment)
+  - [Focusing and Excluding Tests](#focusing-and-excluding-tests)
+  - [Coverage Reporting](#coverage-reporting)
+  - [Continuous Integration](#continuous-integration)
+  - [Disabling jsdom](#disabling-jsdom)
+  - [Snapshot Testing](#snapshot-testing)
+  - [Editor Integration](#editor-integration)
+- [Developing Components in Isolation](#developing-components-in-isolation)
+  - [Getting Started with Storybook](#getting-started-with-storybook)
+  - [Getting Started with Styleguidist](#getting-started-with-styleguidist)
+- [Making a Progressive Web App](#making-a-progressive-web-app)
+  - [Opting Out of Caching](#opting-out-of-caching)
+  - [Offline-First Considerations](#offline-first-considerations)
+  - [Progressive Web App Metadata](#progressive-web-app-metadata)
+- [Analyzing the Bundle Size](#analyzing-the-bundle-size)
+- [Deployment](#deployment)
+  - [Static Server](#static-server)
+  - [Other Solutions](#other-solutions)
+  - [Serving Apps with Client-Side Routing](#serving-apps-with-client-side-routing)
+  - [Building for Relative Paths](#building-for-relative-paths)
+  - [Azure](#azure)
+  - [Firebase](#firebase)
+  - [GitHub Pages](#github-pages)
+  - [Heroku](#heroku)
+  - [Netlify](#netlify)
+  - [Now](#now)
+  - [S3 and CloudFront](#s3-and-cloudfront)
+  - [Surge](#surge)
+- [Advanced Configuration](#advanced-configuration)
+- [Troubleshooting](#troubleshooting)
+  - [`npm start` doesn’t detect changes](#npm-start-doesnt-detect-changes)
+  - [`npm test` hangs on macOS Sierra](#npm-test-hangs-on-macos-sierra)
+  - [`npm run build` exits too early](#npm-run-build-exits-too-early)
+  - [`npm run build` fails on Heroku](#npm-run-build-fails-on-heroku)
+  - [`npm run build` fails to minify](#npm-run-build-fails-to-minify)
+  - [Moment.js locales are missing](#momentjs-locales-are-missing)
+- [Something Missing?](#something-missing)
 
-## Docker Build and Deploy
+## Updating to New Releases
 
-1. First run the npm script for the full build of the project.
-  - `npm run build` documented [Here](docs/react16README.md#npm-run-build)
-2. Create a docker image
-  - from the root of the project run `docker build -t tictac:1.0 .`
-  - you should now have a docker image with the label tictac:1.0
-  - check your docker images with `docker images` to make sure the new image is listed
-3. Deploy the docker image
-  - This docker image uses Nginx to expose the test tictactoe app
-  - run `docker run --rm -p 8888:80 --name tictac-www -d tictac:1.0`
-  - with the -p flag, this will run the docker image locally and expose the applicaiton on port 8888, Nginx is actually running internally inside the container on port 80
-  - the --rm flag ensure the container is removed from the process list if it stopped, otherwise you would have to type a remove command to tell docker to remove the container completely before bringing in a new one to run.
-  - list out the running docker containers with `docker ps`
-
+Create React App is divided into two packages:
 
 * `create-react-app` is a global command-line utility that you use to create new projects.
 * `react-scripts` is a development dependency in the generated projects (including this one).
